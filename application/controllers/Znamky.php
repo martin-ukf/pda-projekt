@@ -23,7 +23,7 @@ class Znamky extends CI_Controller
 		}
 
 		$data['znamky'] = $this->Znamky_model->ZobrazZnamky();
-		//$data['znamky2'] = $this->Znamky_model->ZobrazZnamkySpravne();
+		$data['znamky2'] = $this->Znamky_model->ZobrazZnamkySpravne();
 		$data['nazov'] = 'Zoznam známok';
 		//nahratie zoznamu studentov
 		$this->load->view('templates/header', $data);
@@ -38,7 +38,7 @@ class Znamky extends CI_Controller
 		//kontrola, ci bolo zaslane id riadka
 		if(!empty($id)){
 			$data['znamky'] = $this->Znamky_model->ZobrazZnamky($id);
-		//	$data['znamky2'] = $this->Znamky_model->ZobrazZnamkySpravne($id);
+			$data['znamky2'] = $this->Znamky_model->ZobrazZnamkySpravne($id);
 			$data['title'] = 'Detail známky';
 
 			//nahratie detailu zaznamu
@@ -85,8 +85,8 @@ class Znamky extends CI_Controller
 			}
 		}
 		$data['post'] = $postData;
-	//	$data['studenti'] = $this->Znamky_model->NaplnDropdownStudenti();
-	//	$data['vybrany_student'] = '';
+		$data['studenti'] = $this->Znamky_model->NaplnDropdownStudenti();
+		$data['vybrany_student'] = '';
 		$data['title'] = 'Pridať známku';
 		$data['action'] = 'add';
 
@@ -100,8 +100,8 @@ class Znamky extends CI_Controller
 	public function edit($id){
 		$data = array();
 		//ziskanie dat z tabulky
-		$postData = $this->Znamky_model->ZobrazZnamky($id);
-	//	$postData = $this->Znamky_model->ZobrazZnamkySpravne($id);
+	//	$postData = $this->Znamky_model->ZobrazZnamky($id);
+		$postData = $this->Znamky_model->ZobrazZnamkySpravne($id);
 
 		//zistenie, ci bola zaslana poziadavka na aktualizaciu
 		if($this->input->post('postSubmit')){
@@ -133,8 +133,8 @@ class Znamky extends CI_Controller
 			}
 		}
 
-	//	$data['studenti'] = $this->Znamky_model->NaplnDropdownStudenti();
-	//	$data['vybrany_student'] = $postData['idstudent'];
+		$data['studenti'] = $this->Znamky_model->NaplnDropdownStudenti();
+		$data['vybrany_student'] = $postData['idstudent'];
 		$data['post'] = $postData;
 		$data['title'] = 'Aktualizovať údaje';
 		$data['action'] = 'edit';
